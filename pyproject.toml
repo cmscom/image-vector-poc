@@ -8,6 +8,7 @@ authors = [
 ]
 requires-python = ">=3.13"
 dependencies = [
+    "anywidget>=0.9.21",
     "duckdb>=1.4.4",
     "numpy>=2.4.2",
     "pillow>=12.1.0",
@@ -31,6 +32,7 @@ dev = [
     "matplotlib>=3.10.8",
     "opencv-python>=4.13.0.90",
     "pandas>=3.0.0",
+    "plotly>=6.5.2",
     "pytest>=9.0.2",
     "scikit-learn>=1.8.0",
     "seaborn>=0.13.2",
