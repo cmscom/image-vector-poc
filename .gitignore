@@ -44,7 +44,8 @@ ENV/
 htmlcov/
 
 # Data files
-data/
+data/*
+!data/.gitkeep
 *.duckdb
 *.duckdb.wal
 
