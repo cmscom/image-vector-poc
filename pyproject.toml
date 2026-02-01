@@ -10,12 +10,15 @@ requires-python = ">=3.13"
 dependencies = [
     "anywidget>=0.9.21",
     "duckdb>=1.4.4",
+    "einops>=0.8.2",
     "numpy>=2.4.2",
+    "open-clip-torch>=2.31.0",
     "pillow>=12.1.0",
     "protobuf>=6.33.5",
     "scipy>=1.17.0",
     "sentencepiece>=0.2.1",
     "torch>=2.10.0",
+    "tqdm>=4.67.0",
     "transformers>=5.0.0",
 ]
 
