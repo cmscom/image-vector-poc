@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SigLIP Browser Embedding</title>
+  <script type="module">
+    import { AutoProcessor, SiglipVisionModel, RawImage } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3';
+
+    const MODEL_NAME = 'Xenova/siglip-base-patch16-224';
+
+    function l2Normalize(embedding) {
+      const norm = Math.sqrt(embedding.reduce((sum, val) => sum + val * val, 0));
+      const clippedNorm = Math.max(norm, 1e-8);
+      return embedding.map(val => val / clippedNorm);
+    }
+
+    function updateStatus(msg) {
+      document.getElementById('status').textContent = msg;
+      console.log(msg);
+    }
+
+    window.__RESULTS__ = null;
+    window.__ERROR__ = null;
+
+    window.runEmbedding = async function(imageUrls, dtype = 'fp32') {
+      try {
+        updateStatus('Loading model and processor...');
+        const loadStart = performance.now();
+        const processor = await AutoProcessor.from_pretrained(MODEL_NAME);
+        const model = await SiglipVisionModel.from_pretrained(MODEL_NAME, { dtype });
+        const loadTime = ((performance.now() - loadStart) / 1000).toFixed(1);
+        updateStatus(`Model loaded in ${loadTime}s. Processing ${imageUrls.length} images...`);
+
+        const results = [];
+        const embedStart = performance.now();
+
+        for (let i = 0; i < imageUrls.length; i++) {
+          const url = imageUrls[i];
+          try {
+            const image = await RawImage.read(url);
+            const imageInputs = await processor(image);
+            const { pooler_output } = await model(imageInputs);
+            const rawEmbedding = Array.from(pooler_output.data);
+            const embedding = l2Normalize(rawEmbedding);
+            results.push({
+              url,
+              embedding,
+              time_ms: performance.now() - embedStart,
+            });
+          } catch (err) {
+            console.error(`Error processing ${url}: ${err.message}`);
+            results.push({ url, embedding: new Array(768).fill(0), error: err.message });
+          }
+
+          if ((i + 1) % 5 === 0 || i === imageUrls.length - 1) {
+            updateStatus(`Processing: ${i + 1}/${imageUrls.length}`);
+          }
+        }
+
+        const totalTime = ((performance.now() - embedStart) / 1000).toFixed(1);
+        window.__RESULTS__ = {
+          model: MODEL_NAME,
+          dtype,
+          count: results.length,
+          model_load_seconds: parseFloat(loadTime),
+          processing_time_seconds: parseFloat(totalTime),
+          embeddings: results,
+        };
+        updateStatus(`Done. ${results.length} embeddings in ${totalTime}s`);
+        return window.__RESULTS__;
+      } catch (err) {
+        window.__ERROR__ = err.message;
+        updateStatus(`Error: ${err.message}`);
+        throw err;
+      }
+    };
+  </script>
+</head>
+<body>
+  <h1>SigLIP Browser Embedding</h1>
+  <p id="status">Ready. Call window.runEmbedding(urls, dtype) to start.</p>
+</body>
+</html>
