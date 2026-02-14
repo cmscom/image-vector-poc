@@ -42,4 +42,6 @@ dev = [
     "seaborn>=0.13.2",
     "streamlit>=1.45.0",
     "streamlit-plotly-events>=0.0.6",
+    "insightface>=0.7.3",
+    "onnxruntime-gpu>=1.24.1",
 ]
