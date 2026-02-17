@@ -13,6 +13,7 @@ from .embeddings.japanese_clip import JapaneseCLIPEmbedder
 from .embeddings.jina_clip import JinaCLIPEmbedder
 from .embeddings.openclip import OpenCLIPEmbedder
 from .embeddings.siglip import SigLIPEmbedder
+from .embeddings.siglip2 import SigLIP2Embedder
 from .evaluation.metrics import EvaluationMetrics, evaluate_embeddings
 from .evaluation.reporter import EvaluationReporter
 from .search.semantic import SemanticSearch
@@ -32,6 +33,7 @@ __all__ = [
     "BoundingBox",
     # Embedders
     "SigLIPEmbedder",
+    "SigLIP2Embedder",
     "CLIPEmbedder",
     "DINOv2Embedder",
     "OpenCLIPEmbedder",
