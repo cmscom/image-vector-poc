@@ -129,6 +129,7 @@ class SigLIP2Embedder:
         inputs = self.processor(
             text=texts,
             padding="max_length",
+            truncation=True,
             return_tensors="pt",
         )
         inputs = {k: v.to(self.device) for k, v in inputs.items()}
