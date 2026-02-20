@@ -46,6 +46,7 @@ dev = [
     "onnxruntime-gpu>=1.24.1",
     "qwen-vl-utils>=0.0.8",
     "nbconvert>=7.17.0",
+    "ultralytics>=8.3.0",
 ]
 # NOTE: colpali-engine>=0.3.0 は transformers>=5.0.0 と非互換のため除外
 # NB77 実行時は transformers をダウングレードするか、互換バージョンのリリースを待つ
