@@ -101,3 +101,18 @@
 | 86 | [detection-statistics](86-detection-statistics.ipynb) | 物体検出統計の総合分析 |
 | 87 | [object-search-evaluation](87-object-search-evaluation.ipynb) | 物体ベース画像検索評価 |
 | 88 | [object-detection-summary](88-object-detection-summary.ipynb) | 物体検出実験総括 |
+
+## 99: 大規模スケール評価
+
+| # | Notebook | 概要 |
+|---|----------|------|
+| 99 | [pyconjp-scale-evaluation](99-pyconjp-scale-evaluation.ipynb) | PyCon JP 大規模データでのスケール検証 |
+
+## 100-103: Voronoi パーティション (Firestore 向け近似検索)
+
+| # | Notebook | 概要 |
+|---|----------|------|
+| 100 | [voronoi-partition-firestore](100-voronoi-partition-firestore.ipynb) | Voronoi 分割による Firestore 向け近似最近傍検索 |
+| 101 | [voronoi-scale-analysis](101-voronoi-scale-analysis.ipynb) | Voronoi 検索のスケール分析（ピボット数・割り当て数・top-k の最適化） |
+| 102 | [voronoi-generalization](102-voronoi-generalization.ipynb) | 汎化性能実験（Train/Test 分割 + 増分追加シミュレーション） |
+| 103 | [voronoi-js-search](103-voronoi-js-search.ipynb) | JS 互換性検証: Python vs JS Voronoi 検索の完全一致確認 |
