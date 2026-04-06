@@ -116,3 +116,39 @@
 | 101 | [voronoi-scale-analysis](101-voronoi-scale-analysis.ipynb) | Voronoi 検索のスケール分析（ピボット数・割り当て数・top-k の最適化） |
 | 102 | [voronoi-generalization](102-voronoi-generalization.ipynb) | 汎化性能実験（Train/Test 分割 + 増分追加シミュレーション） |
 | 103 | [voronoi-js-search](103-voronoi-js-search.ipynb) | JS 互換性検証: Python vs JS Voronoi 検索の完全一致確認 |
+
+## 104-107: Voronoi テキスト→画像検索への拡張
+
+| # | Notebook | 概要 |
+|---|----------|------|
+| 104 | [voronoi-text-to-image](104-voronoi-text-to-image.ipynb) | Voronoi 分割のテキスト→画像検索への適用可能性（SigLIP 2 Large, 378 件） |
+| 105 | [voronoi-text-image-scale](105-voronoi-text-image-scale.ipynb) | 大規模評価: 23,464 件での Voronoi テキスト→画像パラメータスイープ |
+| 106 | [voronoi-text-image-generalization](106-voronoi-text-image-generalization.ipynb) | ピボットの汎化性能検証（Train/Test 分割 + 増分追加） |
+| 107 | [voronoi-pivot-export](107-voronoi-pivot-export.ipynb) | 3 モデル（SigLIP 2 Base/Large, CLIP-L）のピボット学習・エクスポート |
+
+## 111-114: Voronoi vs 厳密 kNN 比較
+
+| # | Notebook | 概要 |
+|---|----------|------|
+| 111 | [voronoi-vs-exact-knn-text-to-image](111-voronoi-vs-exact-knn-text-to-image.ipynb) | テキスト→画像: 厳密 kNN vs Voronoi（SigLIP 2 Large, 23K 件） |
+| 112 | [voronoi-vs-exact-knn-image-to-image](112-voronoi-vs-exact-knn-image-to-image.ipynb) | 画像→画像: 厳密 kNN vs Voronoi（SigLIP 2 Large, 23K 件） |
+| 113 | [voronoi-vs-exact-knn-fair-eval](113-voronoi-vs-exact-knn-fair-eval.ipynb) | 公正評価: カタログ 378 件のみ（ラベル欠損排除）→ MRR_ratio = 1.000 |
+| 114 | [voronoi-vs-exact-knn-face](114-voronoi-vs-exact-knn-face.ipynb) | 顔認識: 厳密 kNN vs Voronoi（ArcFace 512-D, 75K 顔） |
+
+## 115-118: HNSW 比較と埋め込み特性レポート
+
+| # | Notebook | 概要 |
+|---|----------|------|
+| 115 | [hnsw-vs-knn-voronoi-text-to-image](115-hnsw-vs-knn-voronoi-text-to-image.ipynb) | 3-way 比較: 厳密 kNN / Voronoi / HNSW（テキスト→画像, DuckDB VSS） |
+| 116 | [hnsw-vs-knn-voronoi-image-to-image](116-hnsw-vs-knn-voronoi-image-to-image.ipynb) | 3-way 比較: 画像→画像（同一モダリティで HNSW ef=128 → BF-R@10=1.000） |
+| 117 | [hnsw-vs-knn-voronoi-face](117-hnsw-vs-knn-voronoi-face.ipynb) | 3-way 比較: 顔認識（ArcFace, 75K 顔, HNSW ef=16 でも BF-R@10=0.967） |
+| 118 | [embedding-characteristics-report](118-embedding-characteristics-report.ipynb) | 埋め込み空間特性レポート: 異方性・Two-tower・モダリティギャップ × ANN 性能 |
+
+## 119-122: HNSW 最適化とライブラリ比較
+
+| # | Notebook | 概要 |
+|---|----------|------|
+| 119 | [hnsw-extended-sweep-text-to-image](119-hnsw-extended-sweep-text-to-image.ipynb) | HNSW 拡張ハイパラスイープ（ef_search 2048 で BF-R@10=1.000, M/ef_c 拡張） |
+| 120 | [modality-gap-correction](120-modality-gap-correction.ipynb) | モダリティギャップ補正実験 → シフト補正は失敗、HNSW+Rerank k=100 が有効 |
+| 121 | [voronoi-hnsw-hybrid](121-voronoi-hnsw-hybrid.ipynb) | Voronoi + HNSW ハイブリッド → ハイブリッドは Voronoi 単独と同等で不要と結論 |
+| 122 | [hnswlib-comparison](122-hnswlib-comparison.ipynb) | hnswlib vs DuckDB VSS: hnswlib が 10-70x 高速、構築も 4x 高速 |
