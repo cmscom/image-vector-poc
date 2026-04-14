@@ -11,6 +11,7 @@ from .embeddings.clip import CLIPEmbedder
 from .embeddings.dinov2 import DINOv2Embedder
 from .embeddings.japanese_clip import JapaneseCLIPEmbedder
 from .embeddings.jina_clip import JinaCLIPEmbedder
+from .embeddings.jina_clip_onnx import JinaCLIPONNXEmbedder
 from .embeddings.openclip import OpenCLIPEmbedder
 from .embeddings.siglip import SigLIPEmbedder
 from .embeddings.siglip2 import SigLIP2Embedder
@@ -39,6 +40,7 @@ __all__ = [
     "OpenCLIPEmbedder",
     "JapaneseCLIPEmbedder",
     "JinaCLIPEmbedder",
+    "JinaCLIPONNXEmbedder",
     # Other Implementations
     "DuckDBVectorStore",
     "SemanticSearch",

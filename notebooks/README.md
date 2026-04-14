@@ -152,3 +152,17 @@
 | 120 | [modality-gap-correction](120-modality-gap-correction.ipynb) | モダリティギャップ補正実験 → シフト補正は失敗、HNSW+Rerank k=100 が有効 |
 | 121 | [voronoi-hnsw-hybrid](121-voronoi-hnsw-hybrid.ipynb) | Voronoi + HNSW ハイブリッド → ハイブリッドは Voronoi 単独と同等で不要と結論 |
 | 122 | [hnswlib-comparison](122-hnswlib-comparison.ipynb) | hnswlib vs DuckDB VSS: hnswlib が 10-70x 高速、構築も 4x 高速 |
+
+## 131-138: Jina CLIP v2 調査シリーズ
+
+SigLIP 2 Large 256 との直接対決。`transformers>=5.0` で PyTorch 経路が壊れているため **公式 ONNX + onnxruntime-gpu** で迂回（`JinaCLIPONNXEmbedder` を実装）。
+
+| # | Notebook | 概要 |
+|---|----------|------|
+| 131 | [eval-jina-clip-v2](131-eval-jina-clip-v2.ipynb) | 画像埋め込み品質（ONNX fp32, 1024-D, 378 枚）→ Trustworthiness 2D=0.974, 3D 距離比 0.550 で全モデル中最高 |
+| 132 | [text-search-jina-clip-v2](132-text-search-jina-clip-v2.ipynb) | Text→Image MRR 評価（18 クエリ）: Overall 0.881 / EN 0.896 / JA 0.852（SigLIP 2 L256 の JA 1.000 に負け） |
+| 133 | [vector-space-jina-clip-v2](133-vector-space-jina-clip-v2.ipynb) | ベクトル空間特性: モダリティギャップ・異方性・Matryoshka → **32-D truncate で MRR 0.972**（SigLIP 2 L256 は 0.475 で崩壊） |
+| 134 | [query-engineering-jina-clip-v2](134-query-engineering-jina-clip-v2.ipynb) | プロンプトプレフィクス実験 → `Query: ` prefix で **EN MRR 0.896→1.000** に跳ね上がる |
+| 135 | [onnx-quantization-jina-clip-v2](135-onnx-quantization-jina-clip-v2.ipynb) | fp32/fp16/int8/q4/q4f16 比較: **fp16 が fp32 と完全一致で最速**、**q4f16 は 861MB で MRR 0.905** 維持（int8 は GPU 上で 2000x 遅く実用不可） |
+| 136 | [js-compatibility-jina-clip-v2](136-js-compatibility-jina-clip-v2.ipynb) | Transformers.js (`JinaCLIPModel`) で **Python vs JS テキスト cos=0.999998**（完全再現）・画像 cos=0.979（PIL vs Sharp 差） |
+| 138 | [summary-jina-clip-v2](138-summary-jina-clip-v2.ipynb) | 総合まとめ：**置き換え見送り推奨**。ただし多言語化・ブラウザ配布・100 万枚超スケール時は Jina v2 + 32-D Matryoshka + q4f16 が有力候補 |

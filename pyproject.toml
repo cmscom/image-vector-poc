@@ -48,6 +48,7 @@ dev = [
     "nbconvert>=7.17.0",
     "ultralytics>=8.3.0",
     "hnswlib>=0.8.0",
+    "sentence-transformers>=5.4.0",
 ]
 # NOTE: colpali-engine>=0.3.0 は transformers>=5.0.0 と非互換のため除外
 # NB77 実行時は transformers をダウングレードするか、互換バージョンのリリースを待つ
